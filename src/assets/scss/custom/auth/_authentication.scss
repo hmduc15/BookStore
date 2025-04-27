@@ -1,0 +1,26 @@
+.custom-form-field {
+  input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+    height: auto;
+  }
+}
+
+.error {
+  gap: 0 5px;
+  .icon_warning {
+    margin-top: 4px;
+  }
+}
+
+// authentication logo
+.logo-img {
+  .icon-30 {
+    height: 3.125rem;
+    width: 3.125rem;
+  }
+}
+
+.auth-card {
+  padding: 40px 50px 50px 50px;
+}

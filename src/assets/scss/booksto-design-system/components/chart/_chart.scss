@@ -1,0 +1,471 @@
+#dashboard-line-chart {
+  height: 300px;
+}
+
+#grossVolume {
+  min-height: 150px !important;
+}
+
+.apexcharts-legend-text {
+  color: var(--bs-heading-color) !important;
+}
+
+.apexcharts-datalabel-value {
+  fill: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] {
+  .apexcharts-tooltip.apexcharts-active,
+  .apexcharts-tooltip-title,
+  .apexcharts-xaxistooltip,
+  .apexcharts-yaxistooltip {
+    // border: var(--bs-border-color);
+    background-color: var(--bs-card-bg) !important;
+    color: var(--bs-heading-color) !important;
+  }
+}
+
+//highcharts dark mode
+
+[data-bs-theme="dark"] {
+  .highcharts-background {
+    fill: var(--bs-body-bg) !important;
+  }
+
+  .highcharts-axis-labels,
+  .highcharts-legend-item {
+    text {
+      fill: #ffffff !important;
+    }
+  }
+
+  .highcharts-button-box {
+    fill: #000000 !important;
+  }
+
+  .highcharts-menu {
+    background-color: var(--bs-body-bg) !important;
+
+    .highcharts-menu-item {
+      color: #ffffff !important;
+    }
+
+    .highcharts-menu-item:hover {
+      color: #000000 !important;
+    }
+  }
+
+  .highcharts-title {
+    fill: #ffffff !important;
+  }
+
+  .highcharts-legend-box {
+    fill: var(--bs-body-bg) !important;
+  }
+
+  .highcharts-label-box {
+    fill: var(--bs-body-bg);
+  }
+
+  .highcharts-tooltip {
+    text {
+      fill: #ffffff !important;
+    }
+  }
+}
+.highcharts-menu > hr {
+  display: none;
+}
+
+// amchart
+@media (min-width: 990px) {
+  [dir="rtl"] {
+    #am-simple-chart,
+    #am-stackedcolumn-chart {
+      [role="tooltip"]:is(:last-child) {
+        g > g > g > text {
+          transform: translateX(80px) !important;
+        }
+      }
+    }
+
+    #am-stackedcolumn-chart {
+      [role="tooltip"]:is(:nth-last-child(2)) {
+        g > g > g > text {
+          transform: translateX(105px) !important;
+        }
+      }
+
+      [role="tooltip"]:is(:nth-last-child(3)) {
+        g > g > g > text {
+          transform: translateX(55px) !important;
+        }
+      }
+    }
+
+    #am-layeredcolumn-chart {
+      [role="tooltip"] {
+        g > g > g > text {
+          transform: translateX(215px) !important;
+        }
+      }
+
+      [role="tooltip"]:is(:last-child) {
+        g > g > g > text {
+          transform: translateX(35px) !important;
+        }
+      }
+
+      [role="tooltip"]:is(:nth-last-child(2)) {
+        g > g > g > text {
+          transform: translateX(30px) !important;
+        }
+      }
+
+      [role="region"] {
+        // transform: translateX(10px) !important;
+
+        g
+          > g
+          > g
+          > g
+          > g
+          > g:is(:last-child)
+          > g
+          > g
+          > g
+          > g:is(:nth-last-child(3))
+          > g {
+          g:nth-child(2) {
+            transform: translateX(85px);
+          }
+
+          g:nth-child(3) {
+            transform: translateX(180px);
+          }
+
+          g:nth-child(4) {
+            transform: translateX(320px);
+          }
+
+          g:nth-child(5) {
+            transform: translateX(410px);
+          }
+
+          g:nth-child(6) {
+            transform: translateX(520px);
+          }
+
+          g:nth-child(7) {
+            transform: translateX(615px);
+          }
+        }
+
+        g
+          > g
+          > g
+          > g
+          > g
+          > g
+          > g
+          > g:nth-child(2)
+          > g
+          > g
+          > g
+          > g:first-child
+          > g
+          > text {
+          transform: translate(115px, -10px);
+        }
+
+        g
+          > g
+          > g
+          > g
+          > g
+          > g
+          > g
+          > g:nth-child(2)
+          > g
+          > g
+          > g
+          > g:nth-child(3) {
+          transform: translateX(50px);
+        }
+      }
+    }
+
+    #am-stackedcolumn-chart {
+      [role="group"] {
+        g > [role="switch"]:first-child > g:last-child > g:first-child {
+          transform: translateX(-55px);
+        }
+
+        g > [role="switch"]:nth-child(2) > g:last-child {
+          g:first-child {
+            transform: translate(-140px, -4px);
+          }
+
+          g:nth-child(2) {
+            transform: translate(250px, 10px);
+          }
+        }
+
+        g > [role="switch"]:nth-child(3) > g:last-child {
+          g:first-child {
+            transform: translate(-120px, -4px);
+          }
+
+          g:nth-child(2) {
+            transform: translate(230px, 10px);
+          }
+        }
+      }
+    }
+
+    #am-datedata-chart {
+      div > svg > g > g > g > g > g:nth-child(4) > g > g > g > text {
+        transform: translateX(45px);
+      }
+
+      div > svg > g > g > g > g > g:nth-child(5) > g > g > g > text {
+        transform: translateX(15px);
+      }
+    }
+
+    #am-zoomable-chart {
+      div
+        > svg
+        > g
+        > g
+        > g
+        > g
+        > g:nth-child(4)
+        > g:nth-child(2)
+        > g
+        > g
+        > text {
+        transform: translateX(50px);
+      }
+
+      div
+        > svg
+        > g
+        > g
+        > g
+        > g
+        > g:nth-child(5)
+        > g:nth-child(2)
+        > g
+        > g
+        > text {
+        transform: translateX(18px);
+      }
+    }
+
+    #am-linescrollzomm-chart {
+      div
+        > svg
+        > g
+        > g
+        > g
+        > g
+        > g:nth-child(4)
+        > g:nth-child(2)
+        > g
+        > g
+        > text {
+        transform: translateX(50px);
+      }
+
+      div
+        > svg
+        > g
+        > g
+        > g
+        > g
+        > g:nth-child(5)
+        > g:nth-child(2)
+        > g
+        > g
+        > text {
+        transform: translateX(40px);
+      }
+
+      div
+        > svg
+        > g
+        > g
+        > g
+        > g
+        > g:nth-child(6)
+        > g:nth-child(2)
+        > g
+        > g
+        > text {
+        transform: translateX(40px);
+      }
+    }
+
+    #am-polarscatter-chart {
+      div
+        > svg
+        > g
+        > g
+        > g
+        > g
+        > g:nth-child(4)
+        > g:nth-child(2)
+        > g
+        > g
+        > text {
+        transform: translateX(25px);
+      }
+
+      [aria-label="Series #1"],
+      [aria-label="Series #2"],
+      [aria-label="Series #3"] {
+        transform: translate(-5px, 3px);
+      }
+    }
+
+    #am-3dpie-chart {
+      [role="region"] {
+        g > g > g > g {
+          [role="group"] {
+            transform: translateY(-20px);
+          }
+        }
+
+        g > g > g {
+          [role="group"] {
+            transform: translateY(400px);
+
+            [role="switch"] > g:last-child > g > g {
+              transform: translateX(35px);
+            }
+
+            [role="switch"] > g:last-child > g:last-child {
+              transform: translate(-15px, 2px);
+            }
+          }
+        }
+      }
+
+      div > svg > g > g > g > g > g:last-child > :last-child > g > g > text {
+        transform: translateX(175px);
+      }
+
+      [aria-label="Belgium: 5.5%"] {
+        text {
+          transform: translateX(90px);
+        }
+      }
+
+      [aria-label="UK: 9.0%"] {
+        text {
+          transform: translateX(50px);
+        }
+      }
+
+      [aria-label="Austria: 11.7%"] {
+        text {
+          transform: translateX(90px);
+        }
+      }
+
+      [aria-label="Australia: 12.8%"] {
+        text {
+          transform: translateX(100px);
+        }
+      }
+
+      [aria-label="Germany: 15.1%"] {
+        text {
+          transform: translateX(100px);
+        }
+      }
+
+      [aria-label="Lithuania"] {
+        text {
+          transform: translateX(-35px);
+        }
+      }
+
+      [aria-label="Germany"] {
+        text {
+          transform: translateX(-35px);
+        }
+      }
+
+      [aria-label="Australia"] {
+        text {
+          transform: translateX(-35px);
+        }
+      }
+
+      [aria-label="Austria"] {
+        text {
+          transform: translateX(-35px);
+        }
+      }
+
+      [aria-label="UK"] {
+        text {
+          transform: translateX(-35px);
+        }
+      }
+
+      [aria-label="Belgium"] {
+        text {
+          transform: translateX(-35px);
+        }
+      }
+    }
+  }
+}
+
+.vue-apexcharts {
+  height: 500px;
+}
+
+.chart-book {
+  .apexcharts-yaxis {
+    transform: translateX(0px) !important;
+  }
+}
+
+[dir="rtl"] {
+  .apexcharts-yaxis {
+    transform: translateX(-20px) !important;
+  }
+
+  .apexcharts-tooltip-series-group {
+    gap: 0.5rem !important;
+  }
+
+  #apex-candlestick-chart .apexcharts-title-text {
+    transform: translateX(112px);
+  }
+
+  #apex-basic .apexcharts-title-text {
+    transform: translateX(159px);
+    color: #808080;
+  }
+  #apex-bubble-chart .apexcharts-title-text {
+    transform: translateX(112px);
+  }
+
+  .highcharts-menu {
+    text-align: end;
+  }
+}
+
+#apex-pie-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}

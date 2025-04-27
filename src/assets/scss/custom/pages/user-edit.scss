@@ -1,0 +1,28 @@
+.form-control {
+    height: 45px;
+    line-height: inherit;
+    background: transparent;
+    border: 1px solid #f1f1f1;
+    font-size: 14px;
+    color: #a09e9e;
+    border-radius: 5px;
+}
+
+.iq-edit-profile .nav-link:hover {
+    color: var(--bs-primary) !important;
+}
+
+.iq-edit-profile .nav-link.active {
+    color: #fff !important;
+}
+
+
+// book-page slilder
+[dir=rtl] .slider__flex .slider__col {
+    margin-left: 1.5rem;
+    margin-right: 0;
+}
+
+[dir=rtl] div.dataTables_wrapper div.dataTables_filter input {
+    margin-right: 0.5em;
+}

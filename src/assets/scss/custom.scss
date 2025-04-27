@@ -1,0 +1,46 @@
+/*!
+* Version: 2.0
+* Template: booksto Clinic And Patient Management Dashboard
+* Author: iqonic.design
+* Design and Developed by: iqonic.design
+* NOTE: This file contains the styling for Template.
+*
+*/
+
+// Configuration
+@import "./bootstrap/functions";
+
+// booksto Design system
+@import "./booksto-design-system/variables";
+@import "./booksto-design-system/variables-dark";
+@import "./booksto-design-system/variables/index";
+@import "./bootstrap/variables";
+@import "./bootstrap/maps";
+@import "./bootstrap/mixins";
+@import "./bootstrap/utilities";
+
+// booksto Design System Mixin And Helper
+@import "./booksto-design-system/helper/mixins";
+@import "./booksto-design-system/helper/reboot";
+
+@import "./custom/auth/authentication";
+@import "./custom/ui-kit/ui-kit";
+
+// Customizer
+@import "./custom/customizer/layouts";
+
+
+// pages
+@import "./custom/pages/wishlist.scss";
+@import "./custom/pages/extra-pages";
+@import "./custom/pages/profile";
+@import "./custom/pages/checkout.scss";
+@import "./custom/pages/home.scss";
+@import "./custom/pages/forms.scss";
+@import "./custom//pages//ui-list-group.scss";
+@import "./custom/pages/kanban.scss";
+@import "./custom/pages/user-edit.scss";
+@import "./custom/pages/datatable-custom.scss";
+@import "./custom/pages/invoice.scss";
+@import "./custom/pages/from-switch.scss";
+@import "./custom/pages/accordion.scss";

@@ -1,0 +1,11 @@
+.page-number {
+    li {
+        width: 44px;
+        height: 44px;
+        line-height: 44px;
+    }
+}
+
+.active>.page-link {
+    z-index: 1 !important;
+}

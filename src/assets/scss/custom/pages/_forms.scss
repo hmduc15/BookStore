@@ -1,0 +1,251 @@
+/* toggle in label designing */
+.toggles {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    border-radius: 30px;
+    // border: 2px solid gray;
+}
+
+.toggles:before {
+    background-color: lightgray;
+}
+
+/* After slide changes */
+.toggles:after {
+    content: '';
+    position: absolute;
+    width: 23px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: white;
+    top: 2px;
+    left: 50%;
+    transition: all 0.5s;
+}
+
+/* Toggle text */
+.texts {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 25px;
+}
+
+/* Checkbox checked effect */
+.checkboxs:not(:checked)+.toggles::after {
+    left: 0%;
+    background-color: gray !important;
+    transition: all 0.5s !important;
+    top: 1px !important;
+}
+
+/* Checkbox checked toggle label bg color */
+.checkboxs:not(:checked)+.toggles {
+    background: none !important;
+    border: 0.5px solid black;
+    color: black !important;
+}
+
+/* Checkbox vanished */
+.checkboxs {
+    display: none;
+}
+
+
+.custom-checkboxs {
+    .form-check-input {
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        width: 1rem;
+        height: 1.25rem;
+        opacity: 0;
+    }
+
+    .form-check-label {
+        position: relative;
+        margin-bottom: 0;
+        vertical-align: top;
+    }
+
+    .form-check-label::after {
+        position: absolute;
+        top: 0.25rem;
+        left: -1.5rem;
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        content: "";
+        background: no-repeat 50%/50% 50%;
+    }
+
+
+    .form-check-label::before {
+        position: absolute;
+        top: 0.25rem;
+        left: -1.7rem;
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        pointer-events: none;
+        content: "";
+        background-color: #fff;
+        border: #adb5bd solid 1px;
+        border-radius: 4px;
+    }
+
+    .custom-control {
+        position: relative;
+        display: block;
+        min-height: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .custom-checkbox.checkbox-icon label i {
+        position: absolute;
+        top: 6px;
+        left: -24px;
+        font-size: 10px;
+        transform: scale(0);
+        -webkit-transform: scale(0);
+        -webkit-transition: all .15s ease-in;
+        transition: all .15s ease-in;
+    }
+
+    .custom-checkbox.checkbox-icon input:checked~label i {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        color: #fff;
+    }
+
+    .custom-checkbox.checkbox-icon input:checked~label::after {
+        display: none;
+    }
+
+    .form-check-input:checked~.form-check-label::before {
+        border-color: var(--bs-primary);
+        background-color: var(--bs-primary);
+    }
+}
+
+[data-bs-theme="dark"] .checkboxs:not(:checked)+.toggles {
+    color: white !important;
+}
+
+// [data-bs-theme="dark"] .dataTables_filter .form-control:focus {
+//     background: black;
+// }
+
+// [data-bs-theme="dark"] .select2-container--default .select2-selection--single {
+//     background: black;
+// }
+
+.select2-selection--single {
+    height: 50px !important;
+    border-color: #f1f1f1 !important;
+}
+
+[data-bs-theme=light] {
+    .select2-selection--single {
+        background-color: transparent !important;
+    }
+}
+
+.form-control:focus,
+.form-select {
+    background-color: transparent !important;
+}
+
+.form-select,
+.form-control {
+    border-color: #f1f1f1 !important;
+}
+
+[data-bs-theme=dark] {
+
+    .form-select,
+    .form-control,
+    .select2-selection--single {
+        border-color: var(--bs-border-color) !important;
+        background-color: transparent !important;
+    }
+
+    .search-input:not(.category-search-input)>* {
+        background-color: var(--bs-body-bg) !important;
+    }
+}
+
+[data-bs-theme=dark] {
+    input[type=file]::file-selector-button {
+        background-color: var(--bs-body-bg) !important;
+        color: var(--bs-heading-color);
+    }
+}
+
+input[type=file]:hover::file-selector-button {
+    background-color: var(--bs-primary) !important;
+    color: #fff !important;
+}
+
+[data-bs-theme=dark] {
+    .category-search-input {
+        .form-control {
+            background-color: var(--bs-gray-900) !important;
+        }
+    }
+}
+
+// email & sms section (user-edit page) {
+@media (max-width: 375px) {
+    .cust-margin {
+        margin-left: 1rem;
+    }
+}
+
+@media screen and (max-width:990px) {
+    .custom-checkbox.checkbox-icon label i {
+        left: -22px !important;
+        top: 5px !important;
+    }
+}
+
+[dir=rtl] {
+    @media (max-width: 375px) {
+        .cust-margin {
+            margin-right: 0.8rem;
+        }
+    }
+
+    @media screen and (max-width:900px) {
+        .custom-checkbox.checkbox-icon label i {
+            left: -28px !important;
+            top: 4.5px !important;
+        }
+    }
+
+    .custom-checkbox.checkbox-icon label i {
+        left: -32px
+    }
+}
+
+// }
+
+#top-tabbar-vertical {
+    span {
+        color: var(--bs-heading-color) !important;
+    }
+}
+
+// form input 
+.form-control {
+    color: var(--bs-heading-color) !important;
+}
+
+// form-label
+.form-label {
+    color: var(--bs-heading-color);
+    font-size: 14px !important;
+    font-weight: 600
+}

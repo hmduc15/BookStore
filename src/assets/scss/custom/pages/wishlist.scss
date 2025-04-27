@@ -1,0 +1,44 @@
+// social-icons
+
+// Book Page Css
+
+.social {
+  li>a {
+    color: #ffffff;
+  }
+}
+
+.social-icons {
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.facebook {
+  background: #3b5998 !important;
+}
+
+.twitter {
+  background: #00acee !important;
+}
+
+.youtube {
+  background: #FF0000 !important;
+}
+
+.pinterest {
+  background: #E60023 !important;
+}
+
+.social {
+  li>a:hover {
+    color: var(--bs-primary);
+    transition: all 0.3s ease;
+  }
+}
+
+.old-price {
+  text-decoration: line-through;
+}

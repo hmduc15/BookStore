@@ -1,0 +1,17 @@
+.choices[data-type*=select-one]::after {
+    right: auto;
+    left: 11.5px;
+}
+
+.choices__list--single .choices__item {
+    text-align: right;
+}
+
+.choices {
+    text-align: right;
+}
+.choices__list--dropdown{
+    border-color: rgba($white , .1);
+    background-color: $card-bg;
+    color: var(--bs-body-color);
+}

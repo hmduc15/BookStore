@@ -1,0 +1,44 @@
+.book-comments {
+  width: 100%;
+  margin: 0 auto;
+  gap: 0 60px;
+  padding: 10px;
+}
+
+.comment-form {
+  width: 40%;
+}
+
+.comments-list {
+  width: 55%;
+}
+
+.comment-item {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+.comment-actions {
+  border-top: 1px solid #eee;
+  padding-top: 0.5rem;
+  gap: 0 5px;
+  flex-direction: column;
+  .comment-btn {
+  }
+
+  .comment-reply {
+    margin-left: 56px;
+  }
+}
+
+.un-like {
+  color: black;
+}
+
+.btn-like {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

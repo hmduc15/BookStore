@@ -1,0 +1,11 @@
+[data-bs-theme="light"] .custom-accordion {
+    .accordion-button, .accordion-collapse {
+        background: #ffffff !important;
+    }
+}
+
+[data-bs-theme="dark"] .custom-accordion {
+    .accordion-button, .accordion-collapse {
+        background: #000000 !important;
+    }
+}
