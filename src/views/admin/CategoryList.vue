@@ -80,6 +80,7 @@ export default {
       },
       { data: "no", title: "No", width: "50px" },
       { data: "name", title: "Tên thể loại", width: "200px" },
+      { data: "book_count", title: "Số lượng sách đang có", width: "200px" },
       { data: "description", title: "Mô tả" },
     ]);
 

@@ -189,6 +189,7 @@
               Hủy
             </b-button>
             <b-button
+              v-if="orderMaster.status == null"
               variant="primary"
               type="button"
               class="btn btn-primary"
@@ -227,6 +228,9 @@ import Swal from "sweetalert2";
 import popupUtil from "@/common/popupUtil";
 import orderStatus from "@/common/contanst/orderStatus";
 import commonFuntion from "@/common/commonFuntion";
+import emailApi from "@/api/System/emailApi";
+import { moduleContext } from "@/store/pinia/store";
+
 export default {
   name: "InvoiceDetailPage",
   components: {
@@ -250,6 +254,7 @@ export default {
     const totalAmount = ref(0);
     const paymentMethod = ref(0);
     const txtPayment = ref("Chọn hình thức thanh toán:");
+    const context = moduleContext().getContext;
 
     const generateImgPath = (path) => {
       return window._linkCdnImage + path;
@@ -459,9 +464,14 @@ export default {
             timer: 2000, // Tự động tắt sau 2 giây
             timerProgressBar: true, // Hiển thị thanh tiến trình đếm ngược
             showConfirmButton: false, // Ẩn nút xác nhận
-          }).then((res) => {
+          }).then(async (res) => {
             window.location.reload();
             window.scrollTo(0, 0);
+            var param = {
+              email: context.email,
+              key: data.order.order_id,
+            };
+            await emailApi.sendEmailOrder(param);
           });
         }
       } catch (ex) {
@@ -491,7 +501,9 @@ export default {
   },
   created() {
     const route = useRoute();
-    this.loadData(route.params.id);
+    orderApi.updateOrderStatusJob().then((res) => {
+      this.loadData(route.params.id);
+    });
   },
 };
 </script>

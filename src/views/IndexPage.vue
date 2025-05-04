@@ -159,6 +159,7 @@
                 :percentage="item.percentage"
                 :subtleColor="item.subtleColor"
                 :colorProgressbar="item.colorProgressbar"
+                :viewBook="true"
               />
             </b-col>
           </b-row>
@@ -177,6 +178,7 @@ import FeaturedWriter from "@/components/widgets/FeaturedWriter.vue";
 import _ from "lodash";
 import MPagination from "@/components/MPagination/MPagination.vue";
 import bookRecommendApi from "@/api/Business/bookRecommendApi";
+import bookApi1 from "@/api/System/bookApi";
 
 export default {
   name: "IndePage",
@@ -295,6 +297,33 @@ export default {
       }
     }
 
+    async function getListTrending() {
+      try {
+        const res = await bookApi1.getListTrending();
+        let lstClone = _.cloneDeep(res);
+        lstClone.map((item) => {
+          var obj = {
+            bookId: item.book_id,
+            imageBook: item.image_url,
+            titleName: item.name,
+            authorName: item.author,
+            viewBook: "true",
+            classBrowseBook: "browse-bookcontent",
+            cart: "true",
+            price: item.selling_price,
+            offerPrice: item.price,
+            authorFontSize: "true",
+            discount_rate: item.discount_rate,
+          };
+          lstTrending.value.push(obj);
+        });
+      } catch (e) {
+        proxy.$toast.error(
+          proxy.$t("i18nMessage.GlobalMessage.ErrorContactAd")
+        );
+      }
+    }
+
     return {
       lstBookBrowse,
       getAllBook,
@@ -306,12 +335,14 @@ export default {
       generateImgPath,
       getAllRecommend,
       lstRecommend,
+      getListTrending,
     };
   },
 
   created() {
     this.getAllBook();
     this.getAllRecommend();
+    this.getListTrending();
   },
 };
 </script>

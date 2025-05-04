@@ -76,6 +76,28 @@ class AuthApi extends BaseApi {
     }
   }
 
+  async sendResetPassword(email) {
+    try {
+      const url = `${this.getBaseUrl()}/sendResetPassword/${email}`
+      const res = await super.get(url);
+
+      return res;
+    } catch (e) {
+      return e;
+    }
+  }
+
+  async resetPassword(data) {
+    try {
+      const url = `${this.getBaseUrl()}/resetPassword`
+      const res = await super.post(url, data);
+
+      return res;
+    } catch (e) {
+      return e;
+    }
+  }
+
 
 }
 

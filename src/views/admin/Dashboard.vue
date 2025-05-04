@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <!--  row 1 -->
-        <b-col md="6" lg="3" class="iq-counter">
+        <b-col md="6" lg="4" class="iq-counter">
           <b-card class="card-block card-stretch card-height">
             <div class="d-flex align-items-center">
               <div
@@ -30,7 +30,64 @@
             </div>
           </b-card>
         </b-col>
-        <b-col md="6" lg="3" class="iq-counter">
+        <b-col md="6" lg="4" class="iq-counter">
+          <b-card class="card-block card-stretch card-height">
+            <div class="d-flex align-items-center">
+              <div
+                class="rounded-circle p1 bg-primary d-flex align-items-center justify-content-center"
+                style="width: 66px; height: 66px; font-size: 22px"
+              >
+                <i class="ph ph-user text-white"></i>
+              </div>
+              <div class="text- ms-3 mt-3 d-flex flex-column gap-2">
+                <h2>
+                  <vue3-autocounter
+                    ref="counter"
+                    :start-amount="0"
+                    :end-amount="dashBoard1.genre"
+                    separator=""
+                    :duration="2"
+                  />
+                </h2>
+                <h5 class="">Thể loại</h5>
+              </div>
+            </div>
+            <div class="action-dedtail">
+              <router-link to="/admin/category-list">Xem chi tiết</router-link>
+            </div>
+          </b-card>
+        </b-col>
+        <b-col md="6" lg="4" class="iq-counter">
+          <b-card class="card-block card-stretch card-height">
+            <div class="d-flex align-items-center">
+              <div
+                class="rounded-circle p1 bg-warning d-flex align-items-center justify-content-center"
+                style="width: 66px; height: 66px; font-size: 22px"
+              >
+                <i class="ph ph-shopping-cart text-white"></i>
+              </div>
+              <div class="text-left ms-3 mt-3 d-flex flex-column gap-2">
+                <h2>
+                  <vue3-autocounter
+                    ref="counter"
+                    :start-amount="0"
+                    :end-amount="dashBoard1.order"
+                    :duration="2"
+                  />
+                </h2>
+                <h5>Đơn hàng</h5>
+              </div>
+            </div>
+            <div class="action-dedtail">
+              <router-link to="/admin/order-list">Xem chi tiết</router-link>
+            </div>
+          </b-card>
+        </b-col>
+        <!-- end -->
+      </b-row>
+      <!-- row 2 -->
+      <b-row class="d-flex justify-content-between">
+        <b-col md="6" lg="4" class="iq-counter">
           <b-card class="card-block card-stretch card-height">
             <div class="d-flex align-items-center">
               <div
@@ -56,33 +113,56 @@
             </div>
           </b-card>
         </b-col>
-        <b-col md="6" lg="3" class="iq-counter">
+        <b-col md="6" lg="4" class="iq-counter">
           <b-card class="card-block card-stretch card-height">
             <div class="d-flex align-items-center">
               <div
-                class="rounded-circle p1 bg-warning d-flex align-items-center justify-content-center"
+                class="rounded-circle p1 bg-danger d-flex align-items-center justify-content-center"
                 style="width: 66px; height: 66px; font-size: 22px"
               >
-                <i class="ph ph-shopping-cart text-white"></i>
+                <i class="ph ph-basket text-white"></i>
               </div>
               <div class="text-left ms-3 mt-3 d-flex flex-column gap-2">
                 <h2>
                   <vue3-autocounter
                     ref="counter"
                     :start-amount="0"
-                    :end-amount="dashBoard1.order"
+                    :end-amount="dashBoard1.bookSale"
                     :duration="2"
                   />
                 </h2>
-                <h5>Đơn hàng</h5>
+                <h5>Sách đã bán</h5>
               </div>
-            </div>
-            <div class="action-dedtail">
-              <router-link to="/admin/user-list">Xem chi tiết</router-link>
             </div>
           </b-card>
         </b-col>
-        <b-col md="6" lg="3" class="iq-counter">
+        <b-col md="6" lg="4" class="iq-counter">
+          <b-card class="card-block card-stretch card-height">
+            <div class="d-flex align-items-center">
+              <div
+                class="rounded-circle p1 bg-danger d-flex align-items-center justify-content-center"
+                style="width: 66px; height: 66px; font-size: 22px"
+              >
+                <i class="ph ph-basket text-white"></i>
+              </div>
+              <div class="text-left ms-3 mt-3 d-flex flex-column gap-2">
+                <h2>
+                  <vue3-autocounter
+                    ref="counter"
+                    :start-amount="0"
+                    :end-amount="dashBoard1.book - dashBoard1.bookSale"
+                    :duration="2"
+                  />
+                </h2>
+                <h5>Sách tồn kho</h5>
+              </div>
+            </div>
+          </b-card>
+        </b-col>
+      </b-row>
+      <!-- row 3 -->
+      <b-row>
+        <b-col lg="4" class="iq-counter">
           <b-card class="card-block card-stretch card-height">
             <div class="d-flex align-items-center">
               <div
@@ -104,15 +184,8 @@
                 <h5>Đơn đã thanh toán</h5>
               </div>
             </div>
-            <div class="action-dedtail">
-              <router-link to="/admin/user-list">Xem chi tiết</router-link>
-            </div>
           </b-card>
         </b-col>
-        <!-- end -->
-      </b-row>
-      <!-- row 2 -->
-      <b-row>
         <b-col md="4">
           <b-card>
             <div class="d-flex align-items-center justify-content-between">

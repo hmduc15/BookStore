@@ -175,8 +175,14 @@ export const AuthRoutes = (prefix) => [
     {
         path: '/auth/recover-pw',
         name: prefix + '.recover-pw',
-        meta: { name: 'Recover Password' },
+        meta: { name: 'Quên mật khẩu' },
         component: () => import('@/views/auth/RecoverPw.vue')
+    },
+    {
+        path: '/auth/reset-password/:key',
+        name: prefix + '.reset-pw',
+        meta: { name: ' ' },
+        component: () => import('@/views/auth/ResetPassword.vue')
     },
     {
         path: '/auth/confirm-mail',

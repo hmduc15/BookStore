@@ -42,6 +42,17 @@ class EmailApi extends BaseApi {
   }
 
 
+  async sendEmailOrder(model) {
+    try {
+      const url = `${this.getBaseUrl()}/sendEmailOrder`
+      const res = await super.post(url, model);
+      return res;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+
 }
 
 export default new EmailApi();

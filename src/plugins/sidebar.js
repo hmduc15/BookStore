@@ -88,7 +88,7 @@ export const sidebarMenu = [
                 miniTitle: 'B'
             },
             {
-                title: 'Danh đơn hàng',
+                title: 'Danh sách đơn hàng',
                 logo: 'ph ph-shopping-bag-open',
                 route: '/admin/order-list',
                 miniTitle: 'B'
@@ -141,54 +141,54 @@ export const sidebarMenu = [
     //     ]
     // },
     {
-        mainTitle: 'Authentication',
-        mainLogo: 'ph-duotone ph-lock-key-open',
-        class: "iq-drop",
-        role: [role.Admin, role.User],
-        children: [
-            {
-                title: 'Login',
-                logo: 'ph-duotone ph-key',
-                route: '/auth/sign-in',
-                miniTitle: 'L'
-            },
-            {
-                title: 'Resister',
-                logo: 'ph-duotone ph-key',
-                route: '/auth/sign-up',
-                miniTitle: 'R'
-            },
-            {
-                title: 'Recover Password',
-                logo: 'ph-duotone ph-voicemail',
-                route: '/auth/recover-pw',
-                miniTitle: 'RP'
-            },
-            {
-                title: 'Comfirm Mail',
-                logo: 'ph-duotone ph-envelope',
-                route: '/auth/confirm-mail',
-                miniTitle: 'CM'
-            },
-            {
-                title: 'Lock Screen',
-                logo: 'ph-duotone ph-lock',
-                route: '/auth/lock-screen',
-                miniTitle: 'LS'
-            },
-            {
-                title: 'Two Factor',
-                logo: 'ph-duotone ph-lock',
-                route: '/auth/two-factor',
-                miniTitle: 'TF'
-            },
-            {
-                title: 'Account Deactivate',
-                logo: 'ph-duotone ph-lock',
-                route: '/auth/account-deactivate',
-                miniTitle: 'AD'
-            },
-        ]
+        // mainTitle: 'Authentication',
+        // mainLogo: 'ph-duotone ph-lock-key-open',
+        // class: "iq-drop",
+        // role: [role.Admin, role.User],
+        // children: [
+        //     {
+        //         title: 'Login',
+        //         logo: 'ph-duotone ph-key',
+        //         route: '/auth/sign-in',
+        //         miniTitle: 'L'
+        //     },
+        //     {
+        //         title: 'Resister',
+        //         logo: 'ph-duotone ph-key',
+        //         route: '/auth/sign-up',
+        //         miniTitle: 'R'
+        //     },
+        //     {
+        //         title: 'Recover Password',
+        //         logo: 'ph-duotone ph-voicemail',
+        //         route: '/auth/recover-pw',
+        //         miniTitle: 'RP'
+        //     },
+        //     {
+        //         title: 'Comfirm Mail',
+        //         logo: 'ph-duotone ph-envelope',
+        //         route: '/auth/confirm-mail',
+        //         miniTitle: 'CM'
+        //     },
+        //     {
+        //         title: 'Lock Screen',
+        //         logo: 'ph-duotone ph-lock',
+        //         route: '/auth/lock-screen',
+        //         miniTitle: 'LS'
+        //     },
+        //     {
+        //         title: 'Two Factor',
+        //         logo: 'ph-duotone ph-lock',
+        //         route: '/auth/two-factor',
+        //         miniTitle: 'TF'
+        //     },
+        //     {
+        //         title: 'Account Deactivate',
+        //         logo: 'ph-duotone ph-lock',
+        //         route: '/auth/account-deactivate',
+        //         miniTitle: 'AD'
+        //     },
+        // ]
     },
     {
         mainTitle: 'Tài khoản',
@@ -203,23 +203,29 @@ export const sidebarMenu = [
                 miniTitle: 'UP'
             },
             {
-                title: 'User Edit',
-                logo: 'ph-duotone ph-note-pencil',
-                route: '/user/user-edit',
-                miniTitle: 'UE'
+                title: 'Quên mật khẩu',
+                logo: 'ph-duotone ph-identification-card',
+                route: '/auth/recover-pw',
+                miniTitle: 'UP'
             },
-            {
-                title: 'User Add',
-                logo: 'ph-duotone ph-plus-circle',
-                route: '/user/user-add',
-                miniTitle: 'UA'
-            },
-            {
-                title: 'User List',
-                logo: 'ph-duotone ph-rows',
-                route: '/user/user-list',
-                miniTitle: 'UL'
-            },
+            // {
+            //     title: 'User Edit',
+            //     logo: 'ph-duotone ph-note-pencil',
+            //     route: '/user/user-edit',
+            //     miniTitle: 'UE'
+            // },
+            // {
+            //     title: 'User Add',
+            //     logo: 'ph-duotone ph-plus-circle',
+            //     route: '/user/user-add',
+            //     miniTitle: 'UA'
+            // },
+            // {
+            //     title: 'User List',
+            //     logo: 'ph-duotone ph-rows',
+            //     route: '/user/user-list',
+            //     miniTitle: 'UL'
+            // },
         ]
     },
 ]

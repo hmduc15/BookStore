@@ -60,6 +60,16 @@ class BookApi extends BaseApi {
     }
   }
 
+  async getListTrending() {
+    try {
+      const url = `${this.getBaseUrl()}/getListTrending`;
+      const res = await super.get(url);
+      return res;
+    } catch (ex) {
+      return ex;
+    }
+  }
+
   async saleBook(data) {
     try {
       const url = `${this.getBaseUrl()}/saleBook/`;

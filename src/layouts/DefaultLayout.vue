@@ -10,11 +10,18 @@
       </div>
       <Footer></Footer>
     </main>
-    <setting-offcanvas></setting-offcanvas>
+    <!-- <setting-offcanvas></setting-offcanvas> -->
+    <df-messenger
+      v-if="!isAdmin"
+      intent="WELCOME"
+      chat-title="BookStoreChatBot"
+      agent-id="c549640a-0708-40a0-ad8d-3928ccbb5a53"
+      language-code="vi"
+    ></df-messenger>
   </div>
 </template>
 
-<script setup>
+<script>
 import { computed, onMounted } from "vue";
 import Sidebar from "@/components/partials/Sidebar.vue";
 import Footer from "@/components/partials/Footer.vue";
@@ -22,29 +29,35 @@ import SettingOffcanvas from "@/components/setting/SettingOffcanvas.vue";
 import Header from "@/components/partials/Header.vue";
 import { useContextStorage } from "@/composables/useContextStorage";
 import { moduleContext } from "@/store/pinia/store";
-import orderApi from "@/api/Business/orderApi";
-
-// Pinia Store
+// import orderApi from "@/api/Business/orderApi";
 import { useSetting } from "@/store/pinia/module/useSetting";
 
-const store = useSetting();
-const pageLayout = computed(() => store.page_layout_value);
+export default {
+  name: "DefaultLayout",
+  components: {
+    Sidebar,
+    Footer,
+    SettingOffcanvas,
+    Header,
+  },
+  setup() {
+    // Pinia Store
+    const store = useSetting();
+    const pageLayout = computed(() => store.page_layout_value);
 
-const { getSoureContextStorage } = useContextStorage();
-let cxtObj = getSoureContextStorage("session_context");
-if (cxtObj && cxtObj.access_token) {
-  moduleContext().setContext(cxtObj);
-}
-
-// await orderApi.updateOrderStatusJob();
-onMounted(async () => {
-  const context = moduleContext().getContext;
-  const isAdmin = context?.isAdmin ?? false; // Safely access isAdmin with fallback
-  if (!isAdmin) {
-    try {
-    } catch (ex) {
-      console.error("Failed to update order status:", ex);
+    const { getSoureContextStorage } = useContextStorage();
+    let cxtObj = getSoureContextStorage("session_context");
+    if (cxtObj && cxtObj.access_token) {
+      moduleContext().setContext(cxtObj);
     }
-  }
-});
+    const isAdmin = moduleContext().getContext.isAdmin;
+    return {
+      pageLayout,
+      isAdmin,
+    };
+  },
+  created() {
+    // orderApi.updateOrderStatusJob();
+  },
+};
 </script>

@@ -132,6 +132,7 @@
               </div>
               <div class="btn-container d-flex gap-3">
                 <b-button
+                  v-if="item.status == 0 || item.status == 2"
                   variant="outline-secondary"
                   type="button"
                   @click.stop="cancelOrder(item)"
@@ -179,6 +180,7 @@ export default {
     const lstOrder = ref([]);
     const lstOrDetailOrg = ref([]);
     const lstDetail = ref([]);
+    const lstCancel = ref([]);
     const quantity = ref({});
     const generateImgPath = (path) => {
       return window._linkCdnImage + path;
@@ -191,6 +193,10 @@ export default {
       if (value == -1) {
         lstDetail.value = lst;
       } else {
+        if (value == 1) {
+          lstDetail.value = lstCancel.value;
+          return;
+        }
         lstDetail.value = lst.filter((x) => x.status == value);
       }
     }
@@ -219,6 +225,7 @@ export default {
         let grArray = commonFuntion.groupBy(lstOrderDetail, "order_id");
         lstOrDetailOrg.value = proxy.customData(grArray);
         lstDetail.value = lstOrDetailOrg.value;
+        lstCancel.value = lstOrDetailOrg.value.filter((x) => x.status == 1);
       }
     }
 
@@ -228,7 +235,9 @@ export default {
         const firstItem = groupItems[0];
 
         // Tạo bản sao của item đầu tiên để không làm thay đổi dữ liệu gốc
-        const newItem = { ...firstItem };
+        const newItem = {
+          ...firstItem,
+        };
         var mapItem = lstOrder.value.find((x) => x.order_id == groupKey);
         newItem.total_price = mapItem.total_price;
         newItem.order_code = mapItem.order_code;
@@ -245,7 +254,8 @@ export default {
 
     async function cancelOrder(item) {
       item.status = orderStatus.Cancel;
-
+      quantity.value.Cancel += 1;
+      lstCancel.value.push(item);
       try {
         const res = await orderApi.updateOrderStatus(item);
         if (res && res.isSuccess) {
@@ -255,6 +265,7 @@ export default {
         console.log(ex);
       }
     }
+
     function viewDetail(item) {
       proxy.$router.push(`/shop/invoice/detail/${item.order_id}`);
     }
@@ -297,13 +308,16 @@ export default {
       cancelOrder,
       viewDetail,
       reBuy,
+      lstCancel,
     };
     s;
   },
   created() {
-    this.getAllOrder();
-    this.getQuantityStatus();
-    //  this.getAllDetail();
+    orderApi.updateOrderStatusJob().then((res) => {
+      this.getAllOrder();
+      this.getQuantityStatus();
+    });
+    //this.getAllDetail();
   },
 };
 </script>
@@ -313,6 +327,7 @@ export default {
   background-color: var(--bs-gray-900);
   padding: 5px;
   border-radius: 5px;
+
   .tab-title {
     padding: 15px 15px 5px;
   }
@@ -324,31 +339,38 @@ export default {
     padding: 16px 24px;
 
     border-radius: 5px;
+
     &:hover {
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
       border: 0px solid #ccc;
       cursor: pointer;
     }
+
     .order-top {
       padding: 10px;
+
       .order-code {
         color: var(--bs-primary);
         font-weight: 600;
         font-size: 15px;
       }
     }
+
     .order-body {
       padding: 15px 0;
+
       .name {
         font-weight: 600;
         color: #000;
       }
     }
+
     .order-footer {
       padding: 10px 0;
       gap: 10px 0;
       justify-content: space-between;
       align-items: center;
+
       .total-amount {
         color: #000;
         font-weight: 600;
@@ -356,6 +378,7 @@ export default {
     }
   }
 }
+
 .tab-item {
   display: flex;
   align-items: center;
@@ -383,10 +406,12 @@ export default {
     color: var(--bs-primary);
     background-color: unset;
   }
+
   .tab-item-count {
     padding: 5px;
   }
 }
+
 .order-status {
   padding: 2px 10px 1px 10px;
   background-color: var(--p-primary-50);
@@ -410,6 +435,7 @@ export default {
   height: 90px;
   object-fit: contain;
 }
+
 .badge-status {
   width: fit-content;
   border-radius: 20px;
@@ -426,29 +452,37 @@ export default {
   color: #f6a500;
   border-color: transparent;
 }
+
 .done {
   border-color: transparent;
 
   background-color: #d5f1d7;
   color: #41d241;
 }
+
 .in-progress {
   background: rgba(36, 137, 244, 0.2);
   color: #2489f4;
   border-color: transparent;
 }
+
 .paid {
-  background-color: #d1ecf1; /* Xanh dương nhạt */
+  background-color: #d1ecf1;
+  /* Xanh dương nhạt */
   color: #0c5460;
   border-color: transparent;
 }
+
 .cancel {
-  background-color: #f8d7da; /* Nền đỏ nhạt */
+  background-color: #f8d7da;
+  /* Nền đỏ nhạt */
   color: #721c24;
   border-color: transparent;
 }
+
 .approved {
-  background-color: #fff3cd; /* Vàng nhạt */
+  background-color: #fff3cd;
+  /* Vàng nhạt */
   color: #856404;
   border-color: transparent;
 }

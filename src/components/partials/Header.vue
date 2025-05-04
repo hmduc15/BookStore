@@ -10,7 +10,7 @@
       >
         <ul class="mb-2 navbar-nav align-items-center navbar-list mb-lg-0">
           <!-- Cart -->
-          <li class="nav-item dropdown">
+          <li v-if="!context.isAdmin" class="nav-item dropdown">
             <a
               href="#"
               class="nav-link"
@@ -98,7 +98,7 @@
           </li>
 
           <!-- wishlist -->
-          <li class="nav-item dropdown">
+          <li v-if="!context.isAdmin" class="nav-item dropdown">
             <a
               href="#"
               class="nav-link"
@@ -257,10 +257,7 @@
                       </div>
                     </div>
                   </router-link> -->
-                  <router-link
-                    class="iq-sub-card"
-                    to="/extra-pages/account-setting"
-                  >
+                  <router-link class="iq-sub-card" to="/shop/invoice/list">
                     <div class="d-flex align-items-center">
                       <div
                         class="avatar-40 rounded-pill bg-primary-subtle text-primary d-flex align-items-center justify-content-center"
@@ -441,6 +438,7 @@ export default {
       lstWishList,
       removeWishList,
       updateWishList,
+      context,
     };
   },
   created() {

@@ -115,6 +115,14 @@ export default {
         }
       }
 
+      if (props.rule === "email" && internalText.value?.trim()) {
+        const isValid = commonFuntion.isValidEmail(internalText.value);
+        if (!isValid) {
+          hasError.value = true;
+          errorMessage.value = `${props.Placeholder} không đúng định dạng!`;
+          return true;
+        }
+      }
       hasError.value = false;
       errorMessage.value = "";
       return false;

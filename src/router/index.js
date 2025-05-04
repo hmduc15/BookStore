@@ -58,6 +58,8 @@ router.beforeEach((to, from, next) => {
     commonFuntion.mask();
     const auth = moduleUser();
     const isAuthenticated = auth.isAuthenticated();
+
+
     const isAdmin = moduleContext().getContext.isAdmin;
     let roleRouter = to.meta.role;
 
