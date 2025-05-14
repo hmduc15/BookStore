@@ -398,9 +398,14 @@ export default {
                     timer: 2000, // Tự động tắt sau 2 giây
                     timerProgressBar: true, // Hiển thị thanh tiến trình đếm ngược
                     showConfirmButton: false, // Ẩn nút xác nhận
-                  }).then((res) => {
+                  }).then(async (res) => {
                     window.location.reload();
                     window.scrollTo(0, 0);
+                    var param = {
+                      email: context.email,
+                      key: data.order.order_id,
+                    };
+                    await emailApi.sendEmailOrder(param);
                   });
                 }
               },
@@ -424,22 +429,49 @@ export default {
             commonFuntion.unmask();
             window.location.reload();
             window.scrollTo(0, 0);
+
+            var param = {
+              email: context.email,
+              key: data.order.order_id,
+            };
+            await emailApi.sendEmailOrder(param);
           }
           break;
         case 1: // Qr code SePay
           const indexed = new IndexedDB();
+          var data = {
+            order: orderMaster.value,
+            orderDetail: orderDetail.value,
+          };
           indexed.delete(data.order.order_id);
+          commonFuntion.unmask();
+
           popupUtil.show("SepayQrPopup", {
             amount: 2000, //totalAmount.value
             orderCode: orderMaster.value.order_code,
             options: async () => {
               var item = orderMaster.value;
-              item.status = orderStatus.Paid;
-              const res = await orderApi.updateOrderStatus(item);
-              if (res && res.isSuccess) {
+              Swal.fire({
+                title: "Tạo đơn hàng thành công",
+                text: "Bạn sẽ nhận được email xác nhận đơn hàng từ chúng tôi.",
+                icon: "success",
+                background: "#f9f9f9",
+                color: "secondary",
+                timer: 2000, // Tự động tắt sau 2 giây
+                timerProgressBar: true, // Hiển thị thanh tiến trình đếm ngược
+                showConfirmButton: false, // Ẩn nút xác nhận
+              }).then(async (res) => {
                 window.location.reload();
                 window.scrollTo(0, 0);
-              }
+                var param = {
+                  email: context.email,
+                  key: data.order.order_id,
+                };
+                await emailApi.sendEmailOrder(param);
+              });
+
+              item.status = orderStatus.Paid;
+              await orderApi.updateOrderStatus(item);
             },
           });
           break;
@@ -508,15 +540,17 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .order-address {
   max-width: 200px;
   white-space: break-spaces;
 }
+
 .text-total {
   color: #000;
   padding-right: 74px;
 }
+
 .text-method {
   display: flex;
   gap: 0 2px;
@@ -524,12 +558,15 @@ export default {
   color: #000;
   font-weight: 700;
 }
+
 .paid-status {
   background-color: var(--p-highlight-background);
   color: var(--p-primary-color);
 }
+
 .back-router {
   cursor: pointer;
+
   &:hover {
     color: var(--bs-primary);
   }
@@ -551,29 +588,37 @@ export default {
   color: #f6a500;
   border-color: transparent;
 }
+
 .done {
   border-color: transparent;
 
   background-color: #d5f1d7;
   color: #41d241;
 }
+
 .in-progress {
   background: rgba(36, 137, 244, 0.2);
   color: #2489f4;
   border-color: transparent;
 }
+
 .paid {
-  background-color: #d1ecf1; /* Xanh dương nhạt */
+  background-color: #d1ecf1;
+  /* Xanh dương nhạt */
   color: #0c5460;
   border-color: transparent;
 }
+
 .cancel {
-  background-color: #f8d7da; /* Nền đỏ nhạt */
+  background-color: #f8d7da;
+  /* Nền đỏ nhạt */
   color: #721c24;
   border-color: transparent;
 }
+
 .approved {
-  background-color: #fff3cd; /* Vàng nhạt */
+  background-color: #fff3cd;
+  /* Vàng nhạt */
   color: #856404;
   border-color: transparent;
 }

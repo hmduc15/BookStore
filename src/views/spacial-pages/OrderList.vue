@@ -181,6 +181,7 @@ export default {
     const lstOrDetailOrg = ref([]);
     const lstDetail = ref([]);
     const lstCancel = ref([]);
+    const lstCreated = ref([]);
     const quantity = ref({});
     const generateImgPath = (path) => {
       return window._linkCdnImage + path;
@@ -195,6 +196,9 @@ export default {
       } else {
         if (value == 1) {
           lstDetail.value = lstCancel.value;
+          return;
+        } else if (value == 0) {
+          lstDetail.value = lstCreated.value;
           return;
         }
         lstDetail.value = lst.filter((x) => x.status == value);
@@ -226,6 +230,7 @@ export default {
         lstOrDetailOrg.value = proxy.customData(grArray);
         lstDetail.value = lstOrDetailOrg.value;
         lstCancel.value = lstOrDetailOrg.value.filter((x) => x.status == 1);
+        lstCreated.value = lstOrDetailOrg.value.filter((x) => x.status == 0);
       }
     }
 
@@ -255,7 +260,16 @@ export default {
     async function cancelOrder(item) {
       item.status = orderStatus.Cancel;
       quantity.value.Cancel += 1;
+      quantity.value.Created -= 1;
+
       lstCancel.value.push(item);
+      const index = lstCreated.value.findIndex(
+        (x) => x.order_code === item.order_code
+      );
+      if (index !== -1) {
+        // Xóa item khỏi lstCreated.value bằng splice để giữ tính reactive
+        lstCreated.value.splice(index, 1);
+      }
       try {
         const res = await orderApi.updateOrderStatus(item);
         if (res && res.isSuccess) {
@@ -309,6 +323,7 @@ export default {
       viewDetail,
       reBuy,
       lstCancel,
+      lstCreated,
     };
     s;
   },

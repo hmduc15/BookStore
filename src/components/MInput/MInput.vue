@@ -1,5 +1,5 @@
 <template>
-  <div class="v-input" :class="['d-flex flex-column']">
+  <div class="v-input" :class="['d-flex flex-column', isFull ? 'flex-1' : '']">
     <label class="label pb-2 fw-bold" v-if="label">{{ label }}</label>
     <div
       :class="[
@@ -52,6 +52,10 @@ export default {
     label: {
       type: String,
       default: null,
+    },
+    isFull: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ["update:modelValue", "onBlurEvent", "validateError"],
@@ -167,5 +171,8 @@ export default {
 .textfield-input.disabled input {
   background-color: #f0f0f0;
   cursor: not-allowed;
+}
+.flex-1 {
+  flex: 1;
 }
 </style>

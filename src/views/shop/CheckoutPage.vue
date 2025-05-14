@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="isAuthen">
     <b-col lg="8">
       <b-card class="p-0" no-body>
         <b-card-header class="mb-0 d-flex justify-content-between bg-primary">
@@ -81,6 +81,16 @@
       </b-card>
     </b-col>
   </b-row>
+  <div v-else class="img-container">
+    <img
+      class="img"
+      style="width: 37%"
+      src="../../../public/assets/images/pages/login.png"
+    />
+    <router-link to="/auth/sign-in" class="ms-2 mt-5 login">
+      Đăng nhập
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -94,6 +104,7 @@ import IndexedDB from "@/common/indexedDb";
 import commonFuntion from "@/common/commonFuntion";
 import orderStatus from "@/common/contanst/orderStatus";
 import emitter from "@/common/emitter";
+import { moduleUser } from "@/store/pinia/store";
 
 export default {
   name: "CheckoutPage",
@@ -104,6 +115,8 @@ export default {
     const { proxy } = getCurrentInstance();
     const carts = ref([]);
     const totalAmount = ref(0);
+
+    const isAuthen = moduleUser().isAuthenticated();
 
     async function getCarts() {
       try {
@@ -196,10 +209,24 @@ export default {
       mFormat,
       handlePayment,
       saveOrder,
+      isAuthen,
     };
   },
   created() {
-    this.getCarts();
+    const isAuthen = moduleUser().isAuthenticated();
+    if (isAuthen) {
+      this.getCarts();
+    }
   },
 };
 </script>
+<style lang="scss" scoped>
+.img-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.login {
+  font-size: 20px;
+}
+</style>

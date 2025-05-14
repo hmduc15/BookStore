@@ -11,11 +11,14 @@ export default {
   },
   Register: {
     Success: "Đăng kí tài khoản thành công!",
-    OtpError: "Mã OTP không chính xác! Vui long kiểm tra lại.",
+    OtpError: "Mã OTP không chính xác! Vui lòng kiểm tra lại.",
     DuplicateUserEmail: 'Email đã được đăng kí tài khoản!',
     DuplicateUserPhone: 'SĐT đã được đăng kí tài khoản!'
   },
   AddCart: {
     Success: 'Thêm vào giỏ hàng thành công'
+  },
+  AddWishList: {
+    Success: 'Thêm vào yêu thích thành công'
   }
 }

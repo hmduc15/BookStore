@@ -131,7 +131,9 @@ export default {
             };
             const resEmail = await emailApi.sendEmailConfirm(param);
             if (resEmail && resEmail.Success) {
-              proxy.$toast.success("Thêm tài khoản thành công");
+              proxy.$toast.success(
+                "Đã gửi email xác nhận cho tài khoản đăng ký"
+              );
               if (
                 proxy &&
                 proxy._formParam &&

@@ -66,6 +66,7 @@
                   Id="pwd"
                   :required="true"
                   @update:modelValue="handleResetError"
+                  rule="password"
                 ></MInput>
                 <b-button
                   class="btn-show btn-eye position-absolute btn-outline"
@@ -192,6 +193,8 @@ export default {
       proxy.user.useEmail = useEmail.value;
       try {
         commonFn.mask();
+        // var res = {};
+        // res.Success = true;
         var res = await module.checkExistAcc(proxy.user);
         // Neu chua ton tai
         if (res && res.Success) {
@@ -203,7 +206,7 @@ export default {
           } else {
             signIn(proxy.user.phone_number);
           }
-
+          // resOtp.Success = true;
           if (resOtp && resOtp.Success) {
             commonFn.unmask();
             popupUtil.show("ConfirmMail", {

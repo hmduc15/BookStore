@@ -181,12 +181,17 @@
                     :duration="2"
                   />
                 </h2>
-                <h5>Đơn đã thanh toán</h5>
+                <h5>Đơn đã thanh toán + hoàn thành</h5>
               </div>
             </div>
           </b-card>
         </b-col>
-        <b-col md="4">
+        <b-col
+          md="4"
+          v-tooltip="
+            'Tổng doanh thu = Tiền đơn hàng đã thanh toán + đơn hàng đã hoàn thành'
+          "
+        >
           <b-card>
             <div class="d-flex align-items-center justify-content-between">
               <div class="bg-success-subtle rounded p-3">

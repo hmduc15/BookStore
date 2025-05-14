@@ -86,11 +86,9 @@
                       class="btn btn-primary btn-view-cart"
                       role="button"
                       v-if="lstCart.length > 0"
-                    >
-                      <router-link to="/shop/checkout"
-                        >Xem
-                      </router-link></b-button
-                    >
+                      @click="$router.push('/shop/checkout')"
+                      >Xem
+                    </b-button>
                   </div>
                 </div>
               </div>
@@ -129,41 +127,44 @@
                   </div>
                 </div>
                 <div class="p-0 card-body">
-                  <div
-                    class="iq-sub-card"
-                    v-for="item in lstWishList"
-                    :key="item.book_id"
-                  >
-                    <div class="d-flex align-items-center">
-                      <div>
-                        <img
-                          :src="generateImgPath(item.image_url)"
-                          class="img-full rounded"
-                          alt=""
-                        />
-                      </div>
-                      <div class="ms-3 flex-grow-1 text-start">
-                        <router-link :to="`/shop/book-page/${item.book_id}`">
-                          <span class="name"> {{ item.name }}</span>
-                        </router-link>
-                        {{ mFormat.formatAmount(item.price) }}đ
-                      </div>
-                      <button
-                        type="button"
-                        class="btn btn-icon text-danger btn-sm"
-                        @click.stop="removeWishList(item)"
-                      >
-                        <i class="ph ph-x"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="d-flex p-3 justify-content-end">
-                    <b-button
-                      class="btn btn-primary btn-view-cart"
-                      href="#"
-                      role="button"
+                  <template v-if="lstWishList.length > 0">
+                    <div
+                      class="iq-sub-card"
+                      v-for="item in lstWishList"
+                      :key="item.book_id"
                     >
-                      <router-link to="/shop/wishlist">Xem </router-link>
+                      <div class="d-flex align-items-center">
+                        <div>
+                          <img
+                            :src="generateImgPath(item.image_url)"
+                            class="img-full rounded"
+                            alt=""
+                          />
+                        </div>
+                        <div class="ms-3 flex-grow-1 text-start">
+                          <router-link :to="`/shop/book-page/${item.book_id}`">
+                            <span class="name"> {{ item.name }}</span>
+                          </router-link>
+                          {{ mFormat.formatAmount(item.price) }}đ
+                        </div>
+                        <button
+                          type="button"
+                          class="btn btn-icon text-danger btn-sm"
+                          @click.stop="removeWishList(item)"
+                        >
+                          <i class="ph ph-x"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </template>
+                  <MNodata class="mt-5 mb-5" v-else></MNodata>
+                  <div class="d-flex p-3 justify-content-end" v-if="isAuthen">
+                    <b-button
+                      v-if="lstWishList.length > 0"
+                      class="btn btn-primary btn-view-cart"
+                      role="button"
+                      @click="$router.push('/shop/wishlist')"
+                      >Xem
                     </b-button>
                   </div>
                 </div>
@@ -182,20 +183,25 @@
               aria-expanded="false"
             >
               <div class="icon-50">
-                <span class="btn-inner d-inline-block position-relative">
-                  <Avatar
-                    :label="context?.name?.charAt(0)"
-                    class="mr-2"
-                    style="background-color: #ece9fc; color: #2a1261"
-                    size="large"
-                    shape="circle"
-                  />
-                  <span
-                    class="bg-success p-1 rounded-circle position-absolute end-0 bottom-0 border border-3 border-white"
-                  ></span>
+                <span
+                  class="btn-inner d-flex w-100 justify-content-center align-items-center h-100 position-relative"
+                >
+                  <template v-if="isAuthen">
+                    <Avatar
+                      :label="context?.name?.charAt(0)"
+                      class="mr-2"
+                      style="background-color: #ece9fc; color: #2a1261"
+                      size="large"
+                      shape="circle"
+                    />
+                    <span
+                      class="bg-success p-1 rounded-circle position-absolute end-0 bottom-0 border border-3 border-white"
+                    ></span>
+                  </template>
+                  <i v-else class="ph ph-user-circle-minus use-none"></i>
                 </span>
               </div>
-              <div class="d-none d-lg-block">
+              <div class="d-none d-lg-block" v-if="isAuthen">
                 <h6 class="mb-0 line-height">{{ context.name }}</h6>
               </div>
             </a>
@@ -211,53 +217,11 @@
                   </div>
                 </div>
                 <div class="p-0 card-body">
-                  <router-link class="iq-sub-card" to="/user/user-profile">
-                    <div class="d-flex align-items-center">
-                      <div
-                        class="avatar-40 rounded-pill bg-primary-subtle text-primary d-flex align-items-center justify-content-center"
-                      >
-                        <i class="ph ph-user-circle"></i>
-                      </div>
-                      <div class="ms-4 flex-grow-1 text-start">
-                        <h6 class="mb-0">Tài khoản của tôi</h6>
-                        <p class="mb-0 font-size-12">Xem thông tin cá nhân</p>
-                      </div>
-                    </div>
-                  </router-link>
-                  <!-- <router-link class="iq-sub-card" to="/user/user-edit">
-                    <div class="d-flex align-items-center">
-                      <div
-                        class="avatar-40 rounded-pill bg-primary-subtle text-primary d-flex align-items-center justify-content-center"
-                      >
-                        <i class="ph ph-identification-card"></i>
-                      </div>
-                      <div class="ms-4 flex-grow-1 text-start">
-                        <h6 class="mb-0">Edit Profile</h6>
-                        <p class="mb-0 font-size-12">
-                          Modify your personal details.
-                        </p>
-                      </div>
-                    </div>
-                  </router-link> -->
-                  <!-- <router-link
+                  <router-link
                     class="iq-sub-card"
-                    to="/extra-pages/account-setting"
+                    to="/shop/invoice/list"
+                    v-if="isAuthen"
                   >
-                    <div class="d-flex align-items-center">
-                      <div
-                        class="avatar-40 rounded-pill bg-primary-subtle text-primary d-flex align-items-center justify-content-center"
-                      >
-                        <i class="ph ph-user-square"></i>
-                      </div>
-                      <div class="ms-4 flex-grow-1 text-start">
-                        <h6 class="mb-0">Account Settings</h6>
-                        <p class="mb-0 font-size-12">
-                          Manage your account parameters.
-                        </p>
-                      </div>
-                    </div>
-                  </router-link> -->
-                  <router-link class="iq-sub-card" to="/shop/invoice/list">
                     <div class="d-flex align-items-center">
                       <div
                         class="avatar-40 rounded-pill bg-primary-subtle text-primary d-flex align-items-center justify-content-center"
@@ -272,33 +236,26 @@
                       </div>
                     </div>
                   </router-link>
-                  <!-- <router-link
-                    class="iq-sub-card"
-                    to="/extra-pages/privacy-setting"
-                  >
-                    <div class="d-flex align-items-center">
-                      <div
-                        class="avatar-40 rounded-pill bg-primary-subtle text-primary d-flex align-items-center justify-content-center"
-                      >
-                        <i class="ph ph-lock-key"></i>
-                      </div>
-                      <div class="ms-4 flex-grow-1 text-start">
-                        <h6 class="mb-0">Privacy Settings</h6>
-                        <p class="mb-0 font-size-12">
-                          Control your privacy parameters.
-                        </p>
-                      </div>
-                    </div>
-                  </router-link> -->
                   <div
                     class="p-3 d-flex justify-content-center align-items-center"
                   >
-                    <router-link
-                      class="btn btn-primary d-flex align-items-center gap-1"
-                      to="/auth/sign-in"
-                      role="button"
+                    <b-button
+                      class="d-flex align-items-center"
+                      v-if="isAuthen"
+                      variant="primary"
+                      type="button"
+                      @click="logOut"
                       >Đăng suất <i class="ph ph-sign-out"></i
-                    ></router-link>
+                    ></b-button>
+                    <b-button
+                      v-else
+                      class="d-flex align-items-center"
+                      variant="primary"
+                      type="button"
+                      @click="logIn"
+                    >
+                      Đăng nhập <i class="ph ph-sign-out"></i>
+                    </b-button>
                   </div>
                 </div>
               </div>
@@ -320,6 +277,7 @@ import { mFormat } from "@/common/mFomat";
 import MNodata from "../MNodata/MNodata.vue";
 import emitter from "@/common/emitter";
 import bookFavouriteApi from "@/api/Business/bookFavouriteApi";
+import { useContextStorage } from "@/composables/useContextStorage";
 
 export default {
   name: "Header",
@@ -328,6 +286,10 @@ export default {
     const { proxy } = getCurrentInstance();
     const lstCart = ref([]);
     const lstWishList = ref([]);
+
+    const { onLogoutSession } = useContextStorage();
+
+    const isAuthen = moduleUser().isAuthenticated();
 
     onMounted(() => {
       emitter.$on("addToCart", updateCart);
@@ -424,6 +386,17 @@ export default {
       await cartApi.deleteCart(item);
     }
 
+    function logOut() {
+      onLogoutSession();
+      // window.location.reload();
+      window.scrollTo(0, 0);
+      proxy.$router.push("/auth/sign-in");
+    }
+
+    function logIn() {
+      proxy.$router.push("/auth/sign-in");
+    }
+
     return {
       toggleSidebar,
       user,
@@ -439,11 +412,15 @@ export default {
       removeWishList,
       updateWishList,
       context,
+      logOut,
+      isAuthen,
+      logIn,
     };
   },
   created() {
     const context = moduleContext().getContext;
-    if (!context.isAdmin) {
+    const isAuthen = moduleUser().isAuthenticated();
+    if (isAuthen && !context.isAdmin) {
       this.getDataWishList();
       this.getDataCart();
     }
@@ -468,5 +445,8 @@ export default {
   &:hover {
     color: rgba(var(--bs-primary-rgb));
   }
+}
+.use-none {
+  font-size: 46px !important;
 }
 </style>

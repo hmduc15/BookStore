@@ -75,7 +75,7 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta?.name;
 
     if (to.meta.requiresAuth && !isAuthenticated) {
-        next("/auth/sign-in"); // Redirect to login page if the route requires authentication but the user is not authenticated
+        next({ path: "/auth/sign-in", query: { redirect: to.fullPath } }); // Redirect to login page if the route requires authentication but the user is not authenticated
     } else {
         next(); // Proceed to the next route
     }

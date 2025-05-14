@@ -4,7 +4,7 @@ export const DefaultRoutes = (prefix) => [
     {
         path: '',
         name: prefix + '.home',
-        meta: { name: 'Trang chủ', requiresAuth: true },
+        meta: { name: 'Trang chủ', },
         component: () => import('@/views/IndexPage.vue'),
     },
     // {
@@ -33,13 +33,13 @@ export const DefaultRoutes = (prefix) => [
     {
         path: '/shop/checkout',
         name: prefix + '.checkout',
-        meta: { name: 'Giỏ hàng' },
+        meta: { name: 'Giỏ hàng', requiresAuth: true },
         component: () => import('@/views/shop/CheckoutPage.vue'),
     },
     {
         path: '/shop/wishlist',
         name: prefix + '.wishlist',
-        meta: { name: 'Wishlist' },
+        meta: { name: 'Wishlist', requiresAuth: true },
         component: () => import('@/views/shop/WishlistPage.vue'),
     },
     {

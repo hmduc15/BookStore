@@ -175,7 +175,8 @@ export default {
             proxy.$router.push("/admin/dashboard");
           } else {
             // push ve home
-            proxy.$router.push("/shop/category-page");
+            const redirect = proxy.$route.query.redirect || "/";
+            proxy.$router.push(redirect);
           }
         } else {
           proxy.$toast.error(proxy.$t("i18nMessage.Login.FalseLogin"));

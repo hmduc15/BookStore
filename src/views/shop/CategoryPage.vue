@@ -13,7 +13,7 @@
             class="form-group mb-0 select-genre iq-select2-container-width bg-white"
           >
             <select
-              class="select2-basic-single form-control"
+              class="select2-basic-single form-control genre-combo"
               ref="genres"
               style="width: 100%"
               @change="handleChangeGenre"
@@ -30,7 +30,7 @@
           </div>
           <div class="form-group mb-0 iq-select2-container-width bg-white">
             <select
-              class="select2-basic-single form-control"
+              class="select2-basic-single form-control genre-combo"
               ref="year"
               style="width: 100%"
               @change="handleChangeYear"
@@ -184,6 +184,7 @@ export default {
 
     const dataEmpty = ref(false);
     function initChoices() {
+      if (!genres.value || !year.value) return;
       // Xóa instance cũ (nếu có)
       if (genres.value._choices) {
         genres.value._choices.destroy();
@@ -297,7 +298,7 @@ export default {
               classBrowseBook: "browse-bookcontent",
               cart: "true",
               price: item.selling_price,
-              offerPrice: item.discount_price,
+              offerPrice: item.price,
               authorFontSize: "true",
               discountRate: item.discount_rate,
             };
@@ -336,10 +337,6 @@ export default {
         proxy.$toast.error(
           proxy.$t("i18nMessage.GlobalMessage.ErrorContactAd")
         );
-      } finally {
-        nextTick(() => {
-          initChoices();
-        });
       }
     }
 
@@ -471,6 +468,7 @@ export default {
   created() {
     // this.getAllBook();
     this.getAllGenre();
+    this.initChoices();
   },
 };
 </script>
@@ -484,5 +482,8 @@ export default {
 .infinite-loading {
   display: flex;
   justify-content: center;
+}
+.genre-combo {
+  padding: 10px 16px;
 }
 </style>

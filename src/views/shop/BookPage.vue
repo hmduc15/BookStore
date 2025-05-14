@@ -482,7 +482,7 @@ export default {
       try {
         const res = await bookFavouriteApi.addFavourite(obj);
         if (res) {
-          proxy.$toast.success(proxy.$t("i18nMessage.AddCart.Success"));
+          proxy.$toast.success(proxy.$t("i18nMessage.AddWishList.Success"));
         }
       } catch (ex) {
         console.log(ex);

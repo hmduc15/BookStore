@@ -5,6 +5,7 @@
     @beforeOpen="beforeOpen"
     :showConfirm="false"
     @beforeClose="beforeClose"
+    width="900"
   >
     <template v-slot:content>
       <b-col class="d-flex">
