@@ -259,6 +259,7 @@ const addToCart = async () => {
     proxy.$toast.error(proxy.$t("i18nMessage.GlobalMessage.ErrorContactAd"));
   } finally {
     emitter.$emit("addToCart", obj);
+    emitter.$emit("reloadRecommend");
   }
 };
 
@@ -280,6 +281,7 @@ const addToWishList = async () => {
     proxy.$toast.error(proxy.$t("i18nMessage.GlobalMessage.ErrorContactAd"));
   } finally {
     emitter.$emit("addToWishList", obj);
+    emitter.$emit("reloadRecommend");
   }
 };
 

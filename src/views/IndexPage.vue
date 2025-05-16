@@ -169,7 +169,7 @@
   </div>
 </template>
 <script>
-import { ref, getCurrentInstance, onMounted } from "vue";
+import { ref, getCurrentInstance, onMounted, onUnmounted } from "vue";
 import { moduleBook, moduleUser } from "@/store/pinia/store";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwiperCore, { EffectCoverflow, Navigation, Autoplay } from "swiper/core";
@@ -179,6 +179,7 @@ import _ from "lodash";
 import MPagination from "@/components/MPagination/MPagination.vue";
 import bookRecommendApi from "@/api/Business/bookRecommendApi";
 import bookApi1 from "@/api/System/bookApi";
+import emitter from "@/common/emitter";
 
 export default {
   name: "IndePage",
@@ -215,6 +216,13 @@ export default {
       "swiper/09.jpg",
       "swiper/10.jpg",
     ]);
+
+    onMounted(() => {
+      emitter.$on("reloadRecommend", getAllRecommend);
+    });
+    onUnmounted(() => {
+      emitter.$off("reloadRecommend", getAllRecommend);
+    });
 
     const swiperRef = ref(null);
     let swiperInstance = null;
@@ -274,6 +282,7 @@ export default {
       try {
         const res = await bookRecommendApi.getAllBookRecommend();
         let lstClone = _.cloneDeep(res);
+        var lst = [];
         lstClone.map((item) => {
           var obj = {
             bookId: item.book_id,
@@ -288,8 +297,9 @@ export default {
             authorFontSize: "true",
             discount_rate: item.discount_rate,
           };
-          lstRecommend.value.push(obj);
+          lst.push(obj);
         });
+        lstRecommend.value = lst;
       } catch (e) {
         proxy.$toast.error(
           proxy.$t("i18nMessage.GlobalMessage.ErrorContactAd")

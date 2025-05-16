@@ -72,14 +72,18 @@ export default {
         render: function () {
           return `
             <div class="d-flex gap-1 align-items-center list-user-action">
-                                        <a class="btn-edit-book bg-success-subtle rounded" data-toggle="tooltip"
-                                            data-placement="top" title="Edit" >
+                                        <button class="btn-edit-book bg-success-subtle rounded" data-toggle="tooltip"
+                                            data-placement="top" title="Sửa tài khoản" >
                                             <i class="ph ph-pencil-simple text-success custom-ph-icons"></i>
-                                        </a>
-                                        <a class="bg-danger-subtle delete-btn rounded" data-toggle="tooltip"
-                                            data-placement="top" title="Delete"  data-table="action">
+                                        </button>
+                                        <button class="btn-send-email bg-info-subtle rounded" data-toggle="tooltip"
+                                            data-placement="top" title="Gửi email nhắc thông báo đăng nhập" >
+                                           <i class="ph ph-paper-plane-tilt text-info  custom-ph-icons"></i>
+                                        </button>
+                                        <button class="bg-danger-subtle delete-btn rounded" data-toggle="tooltip"
+                                            data-placement="top" title="Xóa tài khoản"  data-table="action">
                                             <i class="ph ph-trash text-danger custom-ph-icons"></i>
-                                        </a>
+                                        </button>
                                     </div>
         `;
         },

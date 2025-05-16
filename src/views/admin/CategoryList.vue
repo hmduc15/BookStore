@@ -66,14 +66,14 @@ export default {
         render: function () {
           return `
             <div class="d-flex gap-1 align-items-center list-user-action">
-                                        <a class="btn  btn-warning-subtle px-1 py-1 rounded d-flex bg-success-subtle btn-edit-genre  rounded" data-toggle="tooltip"
-                                            data-placement="top" title="Sửa">
+                                        <button class="btn-edit-genre bg-success-subtle rounded" data-toggle="tooltip"
+                                            data-placement="top" title="Sửa thể loại">
                                          <i class="ph ph-pencil-simple text-success custom-ph-icons"></i>
-                                        </a>
-                                        <a class="btn bg-danger-subtle delete-btn rounded px-1 py-1 rounded d-flex " data-toggle="tooltip"
-                                            data-placement="top" title="Xóa"  data-table="action">
+                                        </button>
+                                        <button class="bg-danger-subtle delete-btn rounded " data-toggle="tooltip"
+                                            data-placement="top" title="Xóa thể loại"  data-table="action">
                                            <i class="ph ph-trash text-danger custom-ph-icons"></i>
-                                        </a>
+                                        </button>
                                     </div>
         `;
         },

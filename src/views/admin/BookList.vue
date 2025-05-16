@@ -89,14 +89,14 @@ export default {
         render: function () {
           return `
             <div class="d-flex gap-1 align-items-center list-user-action">
-                                        <a class="bg-success-subtle btn-edit-book  rounded" data-toggle="tooltip"
-                                            data-placement="top" title="Edit" href="">
+                                        <button class="bg-success-subtle btn-edit-book  rounded" data-toggle="tooltip"
+                                            data-placement="top" title="Sửa sách">
                                             <i class="ph ph-pencil-simple text-success custom-ph-icons"></i>
-                                        </a>
-                                        <a class="bg-danger-subtle delete-btn rounded" data-toggle="tooltip"
-                                            data-placement="top" title="Delete" href="#" data-table="action">
+                                        </button>
+                                        <button class="bg-danger-subtle delete-btn rounded" data-toggle="tooltip"
+                                            data-placement="top" title="Xóa sách" data-table="action">
                                             <i class="ph ph-trash text-danger custom-ph-icons"></i>
-                                        </a>
+                                        </button>
                                     </div>
         `;
         },
