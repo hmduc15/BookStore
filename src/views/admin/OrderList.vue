@@ -96,11 +96,11 @@ export default {
           return `
             <div class="d-flex gap-1 align-items-center list-user-action">
                                         <button class="bg-success-subtle btn-edit-book  rounded" data-toggle="tooltip"
-                                            data-placement="top" title="Sửa sách">
+                                            data-placement="top" title="Sửa đơn hàng">
                                             <i class="ph ph-pencil-simple text-success custom-ph-icons"></i>
                                         </button>
                                         <button class="bg-danger-subtle delete-btn rounded" data-toggle="tooltip"
-                                            data-placement="top" title="Xóa sách" href="#" data-table="action">
+                                            data-placement="top" title="Xóa đơn hàng" href="#" data-table="action">
                                             <i class="ph ph-trash text-danger custom-ph-icons"></i>
                                         </button>
                                     </div>
@@ -212,8 +212,8 @@ export default {
 
     const deleteSwal = (data) => {
       Swal.fire({
-        title: "Xóa sách",
-        text: "Bạn có chắc chắn muốn xóa sách này không ?",
+        title: "Xóa đơn hàng",
+        text: "Bạn có chắc chắn muốn đơn hàng này không ?",
         icon: "error",
         showCancelButton: true,
         backdrop: "rgba(60,60,60,0.8)",
