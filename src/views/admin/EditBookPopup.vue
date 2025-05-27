@@ -284,7 +284,6 @@ export default {
     };
 
     const removeDetailImage = (index) => {
-      debugger;
       URL.revokeObjectURL(detailImgs.value[index].url);
       detailImgs.value.splice(index, 1);
       imgDetailFile.value.splice(index, 1);
@@ -350,6 +349,7 @@ export default {
         if (res && res.Success) {
           await proxy.uploadImg();
           proxy.$toast.success("Cập nhật sách thành công");
+          proxy.$router.go(-1);
         }
       } catch (ex) {
         console.log(ex);

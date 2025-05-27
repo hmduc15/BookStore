@@ -26,11 +26,17 @@ export const moduleContext = defineStore('context', {
       this.context.access_token = context.access_token || null;
       this.context.email = context.email || null;
       this.context.isAdmin = context.role === role.Admin;
+      this.context.refresh_token = context.refresh_token;
       const { setSourceContextStorage } = useContextStorage();
       // Set context de lam source goc
       setSourceContextStorage(cloneDeep(this.context))
 
     },
+    refreshToken(payload) {
+      this.context.access_token = payload.access_token;
+      this.context.refresh_token = payload.refresh_token;
+    },
+
     clearContext() {
       this.context.name = null;
       this.context.database_id = null;

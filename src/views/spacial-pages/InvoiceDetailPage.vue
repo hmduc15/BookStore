@@ -137,11 +137,7 @@
               Tổng tiền: {{ mFormat.formatAmount(totalAmount) }}</b
             >
           </b-col>
-          <b-col
-            sm="12"
-            class="mt-4 pt-2 border-top"
-            v-if="orderMaster.status !== 3"
-          >
+          <b-col sm="12" class="mt-4 pt-2 border-top">
             <b class="text-danger">{{ txtPayment }}</b>
             <div class="d-flex flex-column gap-4 mt-2">
               <div class="d-flex gap-3">
@@ -180,11 +176,11 @@
             v-if="!orderMaster.status || orderMaster.status == 0"
           >
             <b-button
-              v-if="orderMaster.status != null && orderMaster.status == 0"
+              v-if="orderMaster.status == null || orderMaster.status == 0"
               variant="secondary"
               type="button"
               class="btn btn-primary"
-              @click="() => this.$router.go(-1)"
+              @click="cancelOrder()"
             >
               Hủy
             </b-button>
@@ -314,6 +310,22 @@ export default {
       };
     });
 
+    async function cancelOrder() {
+      var item = orderMaster.value;
+      if (item.status == null) {
+        proxy.$router.push("/");
+      }
+      item.status = orderStatus.Cancel;
+      try {
+        const res = await orderApi.updateOrderStatus(item);
+        if (res && res.isSuccess) {
+          proxy.$toast.success("Hủy đơn hàng thành công");
+        }
+      } catch (ex) {
+        console.log(ex);
+      }
+    }
+
     const handleDownloadPrint = () => {
       // Implement the download print logic here
       console.log("Download Print clicked");
@@ -399,13 +411,21 @@ export default {
                     timerProgressBar: true, // Hiển thị thanh tiến trình đếm ngược
                     showConfirmButton: false, // Ẩn nút xác nhận
                   }).then(async (res) => {
-                    window.location.reload();
-                    window.scrollTo(0, 0);
+                    commonFuntion.mask();
+
                     var param = {
                       email: context.email,
                       key: data.order.order_id,
                     };
-                    await emailApi.sendEmailOrder(param);
+                    try {
+                      await emailApi.sendEmailOrder(param);
+                    } catch (ex) {
+                      console.log(ex);
+                    } finally {
+                      commonFuntion.unmask();
+                    }
+                    window.location.reload();
+                    window.scrollTo(0, 0);
                   });
                 }
               },
@@ -461,17 +481,25 @@ export default {
                 timerProgressBar: true, // Hiển thị thanh tiến trình đếm ngược
                 showConfirmButton: false, // Ẩn nút xác nhận
               }).then(async (res) => {
-                window.location.reload();
-                window.scrollTo(0, 0);
+                commonFuntion.mask();
+
                 var param = {
                   email: context.email,
                   key: data.order.order_id,
                 };
-                await emailApi.sendEmailOrder(param);
-              });
+                try {
+                  await emailApi.sendEmailOrder(param);
+                } catch (ex) {
+                  console.log(ex);
+                } finally {
+                  commonFuntion.unmask();
+                }
+                item.status = orderStatus.Paid;
+                await orderApi.updateOrderStatus(item);
 
-              item.status = orderStatus.Paid;
-              await orderApi.updateOrderStatus(item);
+                window.location.reload();
+                window.scrollTo(0, 0);
+              });
             },
           });
           break;
@@ -482,11 +510,18 @@ export default {
      * Goi api save
      */
     async function saveOrder(data) {
+      commonFuntion.mask();
       try {
         const res = await orderApi.addOrder(data);
         if (res.Success) {
           const indexed = new IndexedDB();
           indexed.delete(data.order.order_id);
+          var param = {
+            email: context.email,
+            key: data.order.order_id,
+          };
+          await emailApi.sendEmailOrder(param);
+
           Swal.fire({
             title: "Tạo đơn hàng thành công",
             text: "Bạn sẽ nhận được email xác nhận đơn hàng từ chúng tôi.",
@@ -499,15 +534,13 @@ export default {
           }).then(async (res) => {
             window.location.reload();
             window.scrollTo(0, 0);
-            var param = {
-              email: context.email,
-              key: data.order.order_id,
-            };
-            await emailApi.sendEmailOrder(param);
           });
         }
       } catch (ex) {
+        commonFuntion.unmask();
         console.log(ex);
+      } finally {
+        commonFuntion.unmask();
       }
     }
 
@@ -529,6 +562,7 @@ export default {
       saveOrder,
       txtPayment,
       handlePayment,
+      cancelOrder,
     };
   },
   created() {

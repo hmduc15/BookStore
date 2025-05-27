@@ -131,7 +131,25 @@ export const moduleUser = defineStore('user', {
         // Se goi them api ở day de cap nhat last login ...
 
       } catch (e) {
+      }
+    },
 
+    async refreshToken(param) {
+      try {
+        const res = await authApi.refreshToken(param);
+        if (res && res.isRefresh) {
+          // Set lai token
+          moduleContext().refreshToken(res);
+
+          return true;
+        } else {
+
+
+          return false;
+        }
+      } catch (ex) {
+
+        return false;
       }
     }
 

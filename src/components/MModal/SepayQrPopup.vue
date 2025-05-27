@@ -35,7 +35,7 @@
                 <tr>
                   <td>Số tiền:</td>
                   <td>
-                    <b>{{ amount }}</b>
+                    <b>{{ mFormat.formatAmount(amount) }}</b>
                   </td>
                 </tr>
                 <tr>
@@ -63,7 +63,7 @@ import MModal from "./MModal.vue";
 import basePopup from "../base/basePopup";
 import orderSystemApi from "@/api/System/orderSystemApi";
 import popupUtil from "@/common/popupUtil";
-
+import { mFormat } from "@/common/mFomat";
 export default {
   name: "SepayQrPopup",
   components: {
@@ -166,6 +166,7 @@ export default {
       checkOrderPaid,
       startPaymentCheck,
       beforeClose,
+      mFormat,
     };
   },
 };

@@ -343,6 +343,7 @@ export default {
         if (res && res.isSuccess) {
           await proxy.uploadImg();
           proxy.$toast.success("Thêm sách thành công");
+          proxy.$router.go(-1);
         }
       } catch (ex) {
         console.log(ex);
@@ -358,7 +359,6 @@ export default {
         });
       }
       try {
-        debugger;
         const res = await imgApi.uploadImg(formData);
         return res;
       } catch (error) {

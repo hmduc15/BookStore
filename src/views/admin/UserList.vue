@@ -76,13 +76,13 @@ export default {
                                             data-placement="top" title="Sửa tài khoản" >
                                             <i class="ph ph-pencil-simple text-success custom-ph-icons"></i>
                                         </button>
-                                        <button class="btn-send-email bg-info-subtle rounded" data-toggle="tooltip"
-                                            data-placement="top" title="Gửi email nhắc thông báo đăng nhập" >
-                                           <i class="ph ph-paper-plane-tilt text-info  custom-ph-icons"></i>
-                                        </button>
                                         <button class="bg-danger-subtle delete-btn rounded" data-toggle="tooltip"
                                             data-placement="top" title="Xóa tài khoản"  data-table="action">
                                             <i class="ph ph-trash text-danger custom-ph-icons"></i>
+                                        </button>
+                                        <button class="btn-send-email bg-info-subtle rounded" data-toggle="tooltip"
+                                            data-placement="top" title="Gửi email nhắc thông báo đăng nhập" >
+                                           <i class="ph ph-paper-plane-tilt text-info  custom-ph-icons"></i>
                                         </button>
                                     </div>
         `;

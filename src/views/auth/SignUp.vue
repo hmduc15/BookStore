@@ -209,6 +209,9 @@ export default {
           // resOtp.Success = true;
           if (resOtp && resOtp.Success) {
             commonFn.unmask();
+            if (useEmail.value) {
+              proxy.user.phone_number = "";
+            }
             popupUtil.show("ConfirmMail", {
               useEmail: useEmail.value,
               key: resOtp.keyRegister,

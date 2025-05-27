@@ -170,7 +170,7 @@
 </template>
 <script>
 import { ref, getCurrentInstance, onMounted, onUnmounted } from "vue";
-import { moduleBook, moduleUser } from "@/store/pinia/store";
+import { moduleBook, moduleUser, moduleContext } from "@/store/pinia/store";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import SwiperCore, { EffectCoverflow, Navigation, Autoplay } from "swiper/core";
 import BookContainer from "@/components/widgets/BookContainer.vue";
@@ -353,7 +353,8 @@ export default {
     this.getAllBook();
     this.getListTrending();
     const isAuthen = moduleUser().isAuthenticated();
-    if (isAuthen) {
+    const isAdmin = moduleContext().getContext.isAdmin;
+    if (isAuthen && !isAdmin) {
       this.getAllRecommend();
     }
   },

@@ -213,7 +213,9 @@
               <div class="m-0 card-shadow card">
                 <div class="py-3 card-header rounded-top-3 bg-primary mb-0">
                   <div class="header-title">
-                    <h5 class="mb-0 text-white">{{ context.name }}</h5>
+                    <h5 class="mb-0 text-white" v-if="isAuthen">
+                      {{ context.name }}
+                    </h5>
                   </div>
                 </div>
                 <div class="p-0 card-body">
@@ -290,6 +292,7 @@ export default {
     const { onLogoutSession } = useContextStorage();
 
     const isAuthen = moduleUser().isAuthenticated();
+    // const isAuthen = false;
 
     onMounted(() => {
       emitter.$on("addToCart", updateCart);
@@ -387,10 +390,11 @@ export default {
     }
 
     function logOut() {
+      moduleContext().setContext({});
       onLogoutSession();
-      // window.location.reload();
+      window.location.reload();
       window.scrollTo(0, 0);
-      proxy.$router.push("/auth/sign-in");
+      proxy.$router.push("/");
     }
 
     function logIn() {

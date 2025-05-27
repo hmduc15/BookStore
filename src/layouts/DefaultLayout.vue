@@ -28,7 +28,7 @@ import Footer from "@/components/partials/Footer.vue";
 import SettingOffcanvas from "@/components/setting/SettingOffcanvas.vue";
 import Header from "@/components/partials/Header.vue";
 import { useContextStorage } from "@/composables/useContextStorage";
-import { moduleContext } from "@/store/pinia/store";
+import { moduleContext, moduleUser } from "@/store/pinia/store";
 // import orderApi from "@/api/Business/orderApi";
 import { useSetting } from "@/store/pinia/module/useSetting";
 

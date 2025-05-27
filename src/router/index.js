@@ -8,6 +8,8 @@ import commonFuntion from '@/common/commonFuntion';
 import { moduleContext } from '@/store/pinia/store';
 import role from '@/common/enum/role';
 import { getCurrentInstance } from 'vue';
+import authApi from '@/api/Auth/authApi';
+import { useContextStorage } from "@/composables/useContextStorage";
 
 const routes = [
     {
@@ -53,14 +55,26 @@ router.afterEach(() => {
     }, 300);
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
 
     commonFuntion.mask();
     const auth = moduleUser();
     const isAuthenticated = auth.isAuthenticated();
+    const context = moduleContext().getContext;
 
+    const { getSoureContextStorage } = useContextStorage();
+    let cxtObj = getSoureContextStorage('session_context');
 
-    const isAdmin = moduleContext().getContext.isAdmin;
+    // Da login, nhung token het han thi goi refresh token
+    if (!isAuthenticated && !context.access_token && cxtObj) {
+        var param = {
+            access_token: cxtObj.access_token,
+            refresh_token: cxtObj.refresh_token
+        }
+        const isRefreshToken = await moduleUser().refreshToken(param);
+    }
+
+    const isAdmin = context.isAdmin;
     let roleRouter = to.meta.role;
 
     if (!isAdmin && roleRouter && roleRouter.includes(role.Admin)) {
@@ -73,6 +87,8 @@ router.beforeEach((to, from, next) => {
     }
 
     document.title = to.meta?.name;
+
+
 
     if (to.meta.requiresAuth && !isAuthenticated) {
         next({ path: "/auth/sign-in", query: { redirect: to.fullPath } }); // Redirect to login page if the route requires authentication but the user is not authenticated
